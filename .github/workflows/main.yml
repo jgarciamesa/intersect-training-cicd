@@ -2,12 +2,13 @@ name: Code Checks
 on: push
 jobs:
     test-python-versions:
-        name: Check Python ${{ matrix.python-version }} on Ubuntu
-        runs-on: ubuntu-latest
+        name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
+        runs-on: ${{ matrix.runs-on }}
         continue-on-error: ${{ matrix.allow_failure }}
         strategy:
             fail-fast: false
             matrix:
+                runs-on: [ubuntu-latest, macos-latest, windows-latest]
                 python-version: ["3.10", "3.11"]
                 allow_failure: [false]
                 include:
